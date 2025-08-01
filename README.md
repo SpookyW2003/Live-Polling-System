@@ -201,13 +201,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Lucide React for beautiful icons
 - Vite for the lightning-fast build tool
 
-## 📞 Support
-
-If you encounter any issues or have questions, please:
-1. Check the [Issues](../../issues) page
-2. Create a new issue if your problem isn't already reported
-3. Provide detailed information about your environment and the issue
-
----
 
 **Built with ❤️ for interactive learning and engagement**
