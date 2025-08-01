@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CheckCircle, Clock, Users } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 const PollInterface = ({ poll, sessionId, studentId }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -29,7 +30,7 @@ const PollInterface = ({ poll, sessionId, studentId }) => {
 
   const fetchResults = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/api/polls/${poll.id}/results`);
+      const response = await fetch(`${API_BASE_URL}/api/polls/${poll.id}/results`);
       const data = await response.json();
       if (data.success) {
         setResults(data);
@@ -45,7 +46,7 @@ const PollInterface = ({ poll, sessionId, studentId }) => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:9000/api/polls/${poll.id}/vote`, {
+      const response = await fetch(`${API_BASE_URL}/api/polls/${poll.id}/vote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

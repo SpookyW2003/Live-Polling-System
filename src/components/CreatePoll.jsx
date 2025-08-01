@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus, Trash2, Clock, Send } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 const CreatePoll = ({ sessionId, onPollCreated }) => {
   const [question, setQuestion] = useState('');
@@ -34,7 +35,7 @@ const CreatePoll = ({ sessionId, onPollCreated }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:9000/api/polls/create', {
+      const response = await fetch(`${API_BASE_URL}/api/polls/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

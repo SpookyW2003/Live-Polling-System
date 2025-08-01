@@ -3,12 +3,15 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
+import path from 'path';
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.NODE_ENV === 'production' 
+      ? ["https://live-polling-system-brown.vercel.app", "https://*.vercel.app"]
+      : "http://localhost:3000",
     methods: ["GET", "POST"]
   }
 });
@@ -224,6 +227,23 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 9000;
+
+// For Vercel deployment
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files from dist directory
+  app.use(express.static('dist'));
+  
+  // Handle React Router
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+    }
+  });
+}
+
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Export for Vercel
+export default app;

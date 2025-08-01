@@ -5,6 +5,7 @@ import { useSocket } from '../contexts/SocketContext';
 import { Plus, Users, BarChart3, Settings, Copy, CheckCircle } from 'lucide-react';
 import CreatePoll from '../components/CreatePoll';
 import SessionManager from '../components/SessionManager';
+import { API_BASE_URL } from '../config/api';
 
 const TeacherDashboard = () => {
   const { user } = useAuth();
@@ -24,7 +25,7 @@ const TeacherDashboard = () => {
   const createSession = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:9000/api/sessions/create', {
+      const response = await fetch(`${API_BASE_URL}/api/sessions/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import { Users, BarChart3, Clock, X } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 const SessionManager = ({ session, onSessionUpdate }) => {
   const { socket } = useSocket();
@@ -29,11 +30,11 @@ const SessionManager = ({ session, onSessionUpdate }) => {
 
   const fetchPoll = async (pollId) => {
     try {
-      const response = await fetch(`http://localhost:9000/api/polls/${pollId}/results`);
+      const response = await fetch(`${API_BASE_URL}/api/polls/${pollId}/results`);
       const data = await response.json();
       if (data.success) {
         // Also fetch the poll details
-        const pollResponse = await fetch(`http://localhost:9000/api/sessions/${session.id}`);
+        const pollResponse = await fetch(`${API_BASE_URL}/api/sessions/${session.id}`);
         const sessionData = await pollResponse.json();
         if (sessionData.success) {
           // Here we would need to get the poll details - for now, we'll simulate
@@ -54,7 +55,7 @@ const SessionManager = ({ session, onSessionUpdate }) => {
     if (!currentPoll) return;
 
     try {
-      const response = await fetch(`http://localhost:9000/api/polls/${currentPoll.id}/close`, {
+      const response = await fetch(`${API_BASE_URL}/api/polls/${currentPoll.id}/close`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

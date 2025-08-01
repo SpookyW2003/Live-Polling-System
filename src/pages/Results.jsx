@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 
 const Results = () => {
   const { pollId } = useParams();
@@ -7,7 +8,7 @@ const Results = () => {
 
   useEffect(() => {
     async function fetchResults() {
-      const response = await fetch(`http://localhost:9000/api/polls/${pollId}/results`);
+      const response = await fetch(`${API_BASE_URL}/api/polls/${pollId}/results`);
       const data = await response.json();
       setResults(data);
     }

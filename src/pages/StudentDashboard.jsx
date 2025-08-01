@@ -4,6 +4,7 @@ import { useSocket } from '../contexts/SocketContext';
 import { useNavigate } from 'react-router-dom';
 import { Users, Hash, ArrowRight, Wifi, WifiOff } from 'lucide-react';
 import PollInterface from '../components/PollInterface';
+import { API_BASE_URL } from '../config/api';
 
 const StudentDashboard = () => {
   const { user } = useAuth();
@@ -49,7 +50,7 @@ const StudentDashboard = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:9000/api/sessions/join', {
+      const response = await fetch(`${API_BASE_URL}/api/sessions/join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
