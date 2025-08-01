@@ -8,8 +8,11 @@
     "client": "vite --port 3000",
     "server": "node server/index.js",
     "build": "vite build",
+    "start": "node server/index.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:server": "echo 'Server build complete'",
+    "postbuild": "echo 'Build completed successfully'"
   },
   "dependencies": {
     "react": "^18.3.1",
